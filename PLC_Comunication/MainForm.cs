@@ -102,7 +102,6 @@ namespace PLC_Comunication
         private void lstLogAdd(string log)
         {
             string message = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + " - " + log;
-            CFileIO.SaveTextFile(System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\PLC_Comunication.log", message);
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action(() =>
@@ -118,6 +117,7 @@ namespace PLC_Comunication
                 lstAppLog.SelectedIndex = lstAppLog.Items.Count - 1;
                 lstAppLog.SelectedIndex = -1;
             }
+            CFileIO.WriteLog(System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\PLC_Comunication.log", log);
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
