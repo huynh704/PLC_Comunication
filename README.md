@@ -1,5 +1,5 @@
 Tài khoản đăng nhập
-   private Dictionary<string, string> _acount = new Dictionary<string, string>()
+   _acount = new Dictionary<string, string>()
    {
        { "admin", "admin!123" },
        { "operator", "1234!" }
