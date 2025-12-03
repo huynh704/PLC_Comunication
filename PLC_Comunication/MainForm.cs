@@ -131,10 +131,6 @@ namespace PLC_Comunication
             }
             CPlc.Close();
         }
-        private void lstAppLog_ControlAdded(object sender, ControlEventArgs e)
-        {
-            CFileIO.WriteLog(System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\AppLog.txt", e.Control.Text);
-        }
         private void btnFuntion_Click(object sender, EventArgs e)
         {
             Button btnClick = (Button)sender;
@@ -148,7 +144,7 @@ namespace PLC_Comunication
             loginResult = dlgLogin.ShowDialog();
             if (loginResult == DialogResult.OK)
             {
-                lstLogAdd("User '" + dlgLogin.LoginUserName + "' logged in.");
+                lstLogAdd("Tài khoản '" + dlgLogin.LoginUserName + "' đã đăng nhập");
             }
             else return;
             switch (btnClick.Name)
