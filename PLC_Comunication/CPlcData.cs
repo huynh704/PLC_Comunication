@@ -16,5 +16,24 @@ namespace PLC_Comunication
         {
             InitializeComponent();
         }
+        private void lstLogAdd(string message)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    lstParamList.Items.Add(DateTime.Now.ToString("HH:mm:ss") + " - " + message);
+                    lstParamList.SelectedIndex = lstParamList.Items.Count - 1;
+                    lstParamList.ClearSelected();
+                }));
+            }
+            else
+            {
+                lstParamList.Items.Add(DateTime.Now.ToString("HH:mm:ss") + " - " + message);
+                lstParamList.SelectedIndex = lstParamList.Items.Count - 1;
+                lstParamList.ClearSelected();
+            }
+            CFileIO.WriteLog(System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\PLC_Data.log", message);
+        }
     }
 }

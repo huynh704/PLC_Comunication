@@ -132,6 +132,7 @@ public static class CPlc
     }
     public static int GetString(string szDeviceName, string szSizeName, out string strValue)
     {
+        char[] sep = new char[] { ' ', '\0' };
         strValue = string.Empty;
         short sLength = 0;
         ReturnCode = GetValue16(szSizeName, out sLength);
@@ -145,6 +146,7 @@ public static class CPlc
             bytes[i * 2 + 1] = (byte)(sValue[i] >> 8);
         }
         strValue = aSCII.GetString(bytes, 0, bytes.Length);
+        strValue = strValue.Trim(sep);
         return ReturnCode;
     }
     public static int SET(string szDeviceName)

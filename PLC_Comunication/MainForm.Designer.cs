@@ -96,7 +96,7 @@
             this.btnPlcFuntion.Name = "btnPlcFuntion";
             this.btnPlcFuntion.Size = new System.Drawing.Size(107, 43);
             this.btnPlcFuntion.TabIndex = 1;
-            this.btnPlcFuntion.Text = "Ghi dữ liệu vào PLC";
+            this.btnPlcFuntion.Text = "Câu lệnh ghi cơ bản";
             this.btnPlcFuntion.UseVisualStyleBackColor = true;
             this.btnPlcFuntion.Click += new System.EventHandler(this.btnFuntion_Click);
             // 
