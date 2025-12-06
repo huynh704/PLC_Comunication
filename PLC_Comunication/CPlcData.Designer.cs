@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtImportPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.txtImportPath = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnWritePLC = new System.Windows.Forms.Button();
@@ -54,13 +54,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Đường dẫn tập tin";
             // 
-            // txtImportPath
-            // 
-            this.txtImportPath.Location = new System.Drawing.Point(7, 19);
-            this.txtImportPath.Name = "txtImportPath";
-            this.txtImportPath.Size = new System.Drawing.Size(526, 20);
-            this.txtImportPath.TabIndex = 0;
-            // 
             // btnBrowse
             // 
             this.btnBrowse.Location = new System.Drawing.Point(539, 18);
@@ -69,6 +62,14 @@
             this.btnBrowse.TabIndex = 1;
             this.btnBrowse.Text = "Duyệt";
             this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // txtImportPath
+            // 
+            this.txtImportPath.Location = new System.Drawing.Point(7, 19);
+            this.txtImportPath.Name = "txtImportPath";
+            this.txtImportPath.Size = new System.Drawing.Size(526, 20);
+            this.txtImportPath.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -111,6 +112,7 @@
             this.btnWritePLC.TabIndex = 1;
             this.btnWritePLC.Text = "Ghi vào PLC";
             this.btnWritePLC.UseVisualStyleBackColor = true;
+            this.btnWritePLC.Click += new System.EventHandler(this.btn_Click);
             // 
             // btnReadPLC
             // 
@@ -121,6 +123,7 @@
             this.btnReadPLC.TabIndex = 1;
             this.btnReadPLC.Text = "Đọc từ PLC";
             this.btnReadPLC.UseVisualStyleBackColor = true;
+            this.btnReadPLC.Click += new System.EventHandler(this.btn_Click);
             // 
             // btnExport
             // 
@@ -131,6 +134,7 @@
             this.btnExport.TabIndex = 1;
             this.btnExport.Text = "Xuất ra file";
             this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btn_Click);
             // 
             // btnComparePLC
             // 
@@ -141,10 +145,12 @@
             this.btnComparePLC.TabIndex = 1;
             this.btnComparePLC.Text = "So sánh với PLC";
             this.btnComparePLC.UseVisualStyleBackColor = true;
+            this.btnComparePLC.Click += new System.EventHandler(this.btn_Click);
             // 
             // lstParamList
             // 
             this.lstParamList.FormattingEnabled = true;
+            this.lstParamList.HorizontalScrollbar = true;
             this.lstParamList.Location = new System.Drawing.Point(3, 3);
             this.lstParamList.Name = "lstParamList";
             this.lstParamList.Size = new System.Drawing.Size(521, 368);

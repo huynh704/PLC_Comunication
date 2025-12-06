@@ -85,7 +85,7 @@
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(107, 43);
             this.btnConnect.TabIndex = 1;
-            this.btnConnect.Text = "Connect";
+            this.btnConnect.Text = "Kết nối";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
@@ -241,6 +241,7 @@
             // lstAppLog
             // 
             this.lstAppLog.FormattingEnabled = true;
+            this.lstAppLog.HorizontalScrollbar = true;
             this.lstAppLog.Location = new System.Drawing.Point(13, 199);
             this.lstAppLog.Name = "lstAppLog";
             this.lstAppLog.Size = new System.Drawing.Size(425, 134);

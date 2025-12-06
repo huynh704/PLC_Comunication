@@ -38,9 +38,9 @@
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.txtNumber = new System.Windows.Forms.TextBox();
             this.cbxAction = new System.Windows.Forms.ComboBox();
-            this.lstActLog = new System.Windows.Forms.ListBox();
             this.btnExcute = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.lstActLog = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -182,15 +182,6 @@
             this.cbxAction.TabIndex = 2;
             this.cbxAction.SelectedIndexChanged += new System.EventHandler(this.cbxAction_SelectedIndexChanged);
             // 
-            // lstActLog
-            // 
-            this.lstActLog.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lstActLog.FormattingEnabled = true;
-            this.lstActLog.Location = new System.Drawing.Point(4, 80);
-            this.lstActLog.Name = "lstActLog";
-            this.lstActLog.Size = new System.Drawing.Size(505, 251);
-            this.lstActLog.TabIndex = 2;
-            // 
             // btnExcute
             // 
             this.btnExcute.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -211,6 +202,16 @@
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Hành động";
+            // 
+            // lstActLog
+            // 
+            this.lstActLog.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lstActLog.FormattingEnabled = true;
+            this.lstActLog.HorizontalScrollbar = true;
+            this.lstActLog.Location = new System.Drawing.Point(4, 80);
+            this.lstActLog.Name = "lstActLog";
+            this.lstActLog.Size = new System.Drawing.Size(505, 251);
+            this.lstActLog.TabIndex = 2;
             // 
             // CPlcAct
             // 
