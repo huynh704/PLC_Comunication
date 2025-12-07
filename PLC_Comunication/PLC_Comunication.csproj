@@ -67,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CAesCrypt.cs" />
+    <Compile Include="CEditParam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CEditParam.Designer.cs">
+      <DependentUpon>CEditParam.cs</DependentUpon>
+    </Compile>
     <Compile Include="CFileIO.cs" />
     <Compile Include="CLogin.cs">
       <SubType>Form</SubType>
@@ -95,6 +101,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CEditParam.resx">
+      <DependentUpon>CEditParam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CLogin.resx">
       <DependentUpon>CLogin.cs</DependentUpon>
     </EmbeddedResource>

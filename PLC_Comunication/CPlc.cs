@@ -278,7 +278,7 @@ public static class CPlc
         else
         {
             ReturnCode = mPlc.ReadDeviceBlock2(szDeviceName, 2, out shorts[0]);
-            sValue = (shorts[0] & 0xffff) | ((shorts[1] << 16) & 0xffff);
+            sValue = (shorts[0] & 0xffff) | (shorts[1] << 16);
         }
         if (LastErrorType == ErrorType.Error) IsOpen = false;
         return ReturnCode;
@@ -287,7 +287,7 @@ public static class CPlc
     {
         short sValue = 0;
         ReturnCode = GetValue16(szValueName, out sValue);
-        if (sValue != 0) return ReturnCode;
+        if (ReturnCode != 0) return ReturnCode;
         ReturnCode = mPlc.SetDevice2(szDeviceName, sValue);
         if (LastErrorType == ErrorType.Error) IsOpen = false;
         return ReturnCode;

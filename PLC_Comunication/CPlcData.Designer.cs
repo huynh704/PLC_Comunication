@@ -70,6 +70,7 @@
             this.txtImportPath.Name = "txtImportPath";
             this.txtImportPath.Size = new System.Drawing.Size(526, 20);
             this.txtImportPath.TabIndex = 0;
+            this.txtImportPath.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtImportPath_KeyPress);
             // 
             // tableLayoutPanel1
             // 
@@ -155,6 +156,8 @@
             this.lstParamList.Name = "lstParamList";
             this.lstParamList.Size = new System.Drawing.Size(521, 368);
             this.lstParamList.TabIndex = 1;
+            this.lstParamList.DoubleClick += new System.EventHandler(this.lstParamList_DoubleClick);
+            this.lstParamList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lstParamList_KeyPress);
             // 
             // CPlcData
             // 
