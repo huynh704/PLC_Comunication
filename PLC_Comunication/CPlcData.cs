@@ -15,6 +15,7 @@ namespace PLC_Comunication
     public partial class CPlcData : Form
     {
         private List<PlcParam> plcParamList = new List<PlcParam>();
+        public static List<CResult> ResultList = new List<CResult>();
         public CPlcData()
         {
             InitializeComponent();
@@ -80,7 +81,7 @@ namespace PLC_Comunication
                     }
                     break;
                 case "btnWritePLC":
-                    if(MessageBox.Show("Xác nhận ghi các tham số vào PLC?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+                    if (MessageBox.Show("Xác nhận ghi các tham số vào PLC?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
                     foreach (PlcParam param in plcParamList)
                     {
                         string strParam = string.Format("Ghi tham số '{0}' vào địa chỉ '{1}' với giá trị '{2}'", param.ParamName, param.PlcAddress, param.Value);
@@ -90,12 +91,12 @@ namespace PLC_Comunication
                         }
                         else
                         {
-                           CFileIO.WriteLog(System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\PLC_Data.log", strParam + " thành công");
+                            CFileIO.WriteLog(System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\PLC_Data.log", strParam + " thành công");
                         }
                     }
                     break;
                 case "btnReadPLC":
-                    if(MessageBox.Show("Xác nhận đọc các tham số từ PLC?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+                    if (MessageBox.Show("Xác nhận đọc các tham số từ PLC?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
                     foreach (PlcParam param in plcParamList)
                     {
                         string strParam = string.Format("Đọc tham số '{0}' từ địa chỉ '{1}'", param.ParamName, param.PlcAddress);
@@ -128,7 +129,35 @@ namespace PLC_Comunication
                     }
                     break;
                 case "btnComparePLC":
-
+                    ResultList.Clear();
+                    foreach (PlcParam param in plcParamList)
+                    {
+                        char cValueType = param.Value[0];
+                        string plcValue = string.Empty;
+                        int iGetResult = -1;
+                        switch (param.DataType)
+                        {
+                            case PlcParam.eDataType.INT:
+                            case PlcParam.eDataType.BOOL:
+                                iGetResult = CPlc.GetValue16(param.PlcAddress, out short tempValue16);
+                                plcValue = iGetResult == 0 ? tempValue16.ToString(cValueType == 'H' ? "X" : "") : "Error 0x" + iGetResult.ToString("X8");
+                                break;
+                            case PlcParam.eDataType.DINT:
+                                iGetResult = CPlc.GetValue32(param.PlcAddress, out int tempValue32);
+                                plcValue = iGetResult == 0 ? tempValue32.ToString(cValueType == 'H' ? "X" : "") : "Error 0x" + iGetResult.ToString("X8");
+                                break;
+                            case PlcParam.eDataType.STRING:
+                                int iSize = param.Value.Length / 2;
+                                iSize += param.Value.Length % 2;
+                                iGetResult = CPlc.GetString(param.PlcAddress, "K" + iSize, out string tempValueStr);
+                                plcValue = iGetResult == 0 ? tempValueStr : "Error 0x" + iGetResult.ToString("X8");
+                                break;
+                        }
+                        if(param.DataType != PlcParam.eDataType.STRING && iGetResult == 0) plcValue = cValueType + plcValue;
+                        ResultList.Add(new CResult(param.ParamName, param.PlcAddress, plcValue, param.Value, (plcValue == param.Value ? "Match" : "Missmatch")));
+                    }
+                    CCompareResult cCompareResult = new CCompareResult();
+                    cCompareResult.ShowDialog();
                     break;
             }
         }
@@ -163,7 +192,7 @@ namespace PLC_Comunication
                 lstParamList.Items.AddRange(plcParamList.Select(p => p.GetString).ToArray());
                 lstParamList.ClearSelected();
             }
-            else if(e.KeyChar == (char)Keys.Escape)
+            else if (e.KeyChar == (char)Keys.Escape)
             {
                 lstParamList.ClearSelected();
             }
@@ -295,7 +324,7 @@ namespace PLC_Comunication
                         int iSize = Value.Length / 2;
                         iSize += Value.Length % 2;
                         iResultCode = CPlc.GetString(PlcAddress, "K" + iSize, out string tempString);
-                        if(iResultCode == 0) Value = tempString;
+                        if (iResultCode == 0) Value = tempString;
                         break;
                 }
                 errorMessage = CPlc.LastErrorMessage;
@@ -306,6 +335,22 @@ namespace PLC_Comunication
                 errorMessage = ex.Message;
                 return false;
             }
+        }
+    }
+    public class CResult
+    {
+        public string Name { get; set; }
+        public string PlcAddress { get; set; }
+        public string PlcValue { get; set; }
+        public string LocalValue { get; set; }
+        public string Result { get; set; }
+        public CResult(string name, string plcAddress, string plcValue, string localValue, string result)
+        {
+            Name = name;
+            PlcAddress = plcAddress;
+            PlcValue = plcValue;
+            LocalValue = localValue;
+            Result = result;
         }
     }
 }

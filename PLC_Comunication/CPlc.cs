@@ -241,19 +241,22 @@ public static class CPlc
     {
         sValue = 0;
         char contanceType = szDeviceName.Trim()[0];
-        if (contanceType == 'K')
+        ReturnCode = mPlc.GetDevice2(szDeviceName, out sValue);
+        if (ReturnCode != 0)
         {
-            string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
-            if (short.TryParse(strValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
-            else return -1;
+            if (contanceType == 'K')
+            {
+                string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
+                if (short.TryParse(strValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
+                else return -1;
+            }
+            else if (contanceType == 'H')
+            {
+                string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
+                if (short.TryParse(strValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
+                else return -1;
+            }
         }
-        else if (contanceType == 'H')
-        {
-            string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
-            if (short.TryParse(strValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
-            else return -1;
-        }
-        else ReturnCode = mPlc.GetDevice2(szDeviceName, out sValue);
         if (LastErrorType == ErrorType.Error) IsOpen = false;
         return ReturnCode;
     }
@@ -261,24 +264,23 @@ public static class CPlc
     {
         sValue = 0;
         short[] shorts = new short[2];
-
         char contanceType = szDeviceName.Trim()[0];
-        if (contanceType == 'K')
-        {
-            string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
-            if (int.TryParse(strValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
-            else return -1;
-        }
-        else if (contanceType == 'H')
-        {
-            string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
-            if (int.TryParse(strValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
-            else return -1;
-        }
+        ReturnCode = mPlc.ReadDeviceBlock2(szDeviceName, 2, out shorts[0]);
+        if (ReturnCode == 0) sValue = (shorts[0] & 0xffff) | (shorts[1] << 16);
         else
         {
-            ReturnCode = mPlc.ReadDeviceBlock2(szDeviceName, 2, out shorts[0]);
-            sValue = (shorts[0] & 0xffff) | (shorts[1] << 16);
+            if (contanceType == 'K')
+            {
+                string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
+                if (int.TryParse(strValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
+                else return -1;
+            }
+            else if (contanceType == 'H')
+            {
+                string strValue = szDeviceName.Substring(1, szDeviceName.Length - 1);
+                if (int.TryParse(strValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out sValue)) ReturnCode = 0;
+                else return -1;
+            }
         }
         if (LastErrorType == ErrorType.Error) IsOpen = false;
         return ReturnCode;
@@ -302,7 +304,7 @@ public static class CPlc
     {
         int sValue = 0;
         ReturnCode = GetValue32(szValueName, out sValue);
-        if(ReturnCode != 0) return ReturnCode;
+        if (ReturnCode != 0) return ReturnCode;
         short[] shorts = new short[2];
         shorts[0] = (short)(sValue & 0xffff);
         shorts[1] = (short)(sValue >> 16);
