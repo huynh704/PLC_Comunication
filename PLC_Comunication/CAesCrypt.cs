@@ -9,7 +9,7 @@ using System.IO;
 public class CAesCrypt
 {
     private static readonly byte[] Key = Encoding.ASCII.GetBytes("Nj4ziIVFosrDbIf7FSCRSCWvKBjXzwkw"); // 32 bytes for AES-256
-    private static readonly byte[] IV = ASCIIEncoding.ASCII.GetBytes("ksQHIUqquisJCxun"); // 16 bytes for AES
+    private static readonly byte[] IV = Encoding.ASCII.GetBytes("ksQHIUqquisJCxun"); // 16 bytes for AES
     public static string EncryptString(string plainText)
     {
         byte[] encrypted;

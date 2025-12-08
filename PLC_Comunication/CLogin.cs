@@ -22,7 +22,6 @@ namespace PLC_Comunication
         {
             InitializeComponent();
         }
-
         private void picPassOnOff_Click(object sender, EventArgs e)
         {
             string fileName = txtPassword.PasswordChar == '*' ? "\\PassOff.png" : "\\PassOn.png";
@@ -31,7 +30,6 @@ namespace PLC_Comunication
             picPassOnOff.Image = bitmap;
             txtPassword.PasswordChar = txtPassword.PasswordChar == '*' ? '\0' : '*';
         }
-
         private void CLogin_Shown(object sender, EventArgs e)
         {
             txtPassword.PasswordChar = '\0';
@@ -54,7 +52,6 @@ namespace PLC_Comunication
             }
             else MessageBox.Show("Tên đăng nhập không tồn tại!\n\rVui lòng thử lại!", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
         private void txtinput_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\r')

@@ -159,5 +159,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\DataSources\PassOff.png" />
+    <Content Include="Properties\DataSources\PassOn.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
