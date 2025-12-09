@@ -245,7 +245,7 @@ namespace PLC_Comunication
                 string[] arrData = paraData.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (arrData.Length < 4)
                 {
-                    errorMessage = "Định dạng không chính xác Length = " + arrData.Length;
+                    errorMessage = "Các tham số cần được điền đầy đủ. Thiếu " + (4 - arrData.Length) + " tham số.";
                     return false;
                 }
                 string paramName = arrData[0].Trim();

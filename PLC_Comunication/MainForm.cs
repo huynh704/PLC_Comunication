@@ -90,7 +90,7 @@ namespace PLC_Comunication
                 while (CPlc.IsOpen)
                 {
                     Thread.Sleep(1);
-                    if (ThreadPause) continue;
+                    //if (ThreadPause) continue;
                     int startTime = Environment.TickCount;
 
                     plcInfo = CPlc.GetPlcInformation();

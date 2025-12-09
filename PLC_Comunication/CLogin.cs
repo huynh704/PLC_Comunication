@@ -36,6 +36,7 @@ namespace PLC_Comunication
             picPassOnOff_Click(null, null);
             txtPassword.Text = "";
             txtUserName.Text = "";
+            txtUserName.Focus();
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
