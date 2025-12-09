@@ -166,6 +166,7 @@
             this.ClientSize = new System.Drawing.Size(650, 451);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "CPlcData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

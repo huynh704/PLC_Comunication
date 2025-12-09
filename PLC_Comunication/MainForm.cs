@@ -63,7 +63,7 @@ namespace PLC_Comunication
             while (true)
             {
                 Thread.Sleep(100);
-                if (ThreadPause) continue;
+                //if (ThreadPause) continue;
                 if (this.InvokeRequired)
                 {
                     this.Invoke(new Action(() =>
@@ -97,7 +97,9 @@ namespace PLC_Comunication
 
                     ioTact = Environment.TickCount - startTime;
                 }
+                CPlc.Close();
                 Thread.Sleep(100);
+                CPlc.Open();
             }
         }
         private void lstLogAdd(string log)

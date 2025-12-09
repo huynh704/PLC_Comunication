@@ -78,6 +78,8 @@ public static class CPlc
             CheckReturnCode(ReturnCode, out errorMessage, out errorType);
             return errorMessage;
         }
+        set
+        { LastErrorMessage = value; }
     }
     public static ErrorType LastErrorType
     {
@@ -240,6 +242,7 @@ public static class CPlc
     public static int GetValue16(string szDeviceName, out short sValue)
     {
         sValue = 0;
+        if (string.IsNullOrEmpty(szDeviceName)) return -1;
         char contanceType = szDeviceName.Trim()[0];
         ReturnCode = mPlc.GetDevice2(szDeviceName, out sValue);
         if (ReturnCode != 0)
@@ -264,6 +267,7 @@ public static class CPlc
     {
         sValue = 0;
         short[] shorts = new short[2];
+        if (string.IsNullOrEmpty(szDeviceName)) return -1;
         char contanceType = szDeviceName.Trim()[0];
         ReturnCode = mPlc.ReadDeviceBlock2(szDeviceName, 2, out shorts[0]);
         if (ReturnCode == 0) sValue = (shorts[0] & 0xffff) | (shorts[1] << 16);
