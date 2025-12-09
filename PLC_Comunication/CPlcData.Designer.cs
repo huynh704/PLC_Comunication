@@ -171,6 +171,7 @@
             this.Name = "CPlcData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Sao lưu phục hồi dữ liệu";
+            this.Shown += new System.EventHandler(this.CPlcData_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -13,6 +13,7 @@ namespace PLC_Comunication
     public partial class CLogin : Form
     {
         public string LoginUserName = string.Empty;
+        private ToolTip tTipInput = new ToolTip();
         private Dictionary<string, string> _acount = new Dictionary<string, string>()
         {
             { "admin", "admin!123" },
@@ -32,6 +33,8 @@ namespace PLC_Comunication
         }
         private void CLogin_Shown(object sender, EventArgs e)
         {
+            tTipInput.SetToolTip(txtUserName, "Điền vào tên tài khoản");
+            tTipInput.SetToolTip(txtPassword, "Điền vào mật khẩu");
             txtPassword.PasswordChar = '\0';
             picPassOnOff_Click(null, null);
             txtPassword.Text = "";

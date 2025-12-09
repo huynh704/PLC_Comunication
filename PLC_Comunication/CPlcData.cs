@@ -14,6 +14,7 @@ namespace PLC_Comunication
 {
     public partial class CPlcData : Form
     {
+        private ToolTip tTipInput = new ToolTip();
         private List<PlcParam> plcParamList = new List<PlcParam>();
         public static List<CResult> ResultList = new List<CResult>();
         public CPlcData()
@@ -203,6 +204,10 @@ namespace PLC_Comunication
             {
                 loadDataFromFile(txtImportPath.Text);
             }
+        }
+        private void CPlcData_Shown(object sender, EventArgs e)
+        {
+            tTipInput.SetToolTip(txtImportPath, "Điền vào đường dẫn chính xác của tệp .dat cần nhập.\nNhấn Enter để tiến hành đọc tập tin");
         }
     }
     public class PlcParam
